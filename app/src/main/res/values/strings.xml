@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">RailOne</string>
+    <string name="cd_back">Navigate back</string>
+    <string name="cd_language">Switch language</string>
+    <string name="cd_notifications">Notifications</string>
+    <string name="cd_sort">Sort bookings</string>
+    <string name="cd_refresh">Refresh bookings</string>
+    <string name="cd_edit_ticket">Edit ticket</string>
+    <string name="cd_swap_stations">Swap source and destination stations</string>
+
+    <string name="journey_planner">Journey Planner</string>
+    <string name="more_offerings">More Offerings</string>
+    <string name="upcoming_journey">Upcoming Journey</string>
+    <string name="my_bookings">My Bookings</string>
+    <string name="booking_details">Booking Details</string>
+
+    <string name="book_again">Book Again</string>
+    <string name="view_details">View Details</string>
+    <string name="book_connecting_journey">Book Connecting Journey</string>
+    <string name="edit_ticket">Edit Ticket</string>
+    <string name="book_ticket">Book Ticket</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="confirm_booking">Confirm &amp; Book Ticket</string>
+
+    <string name="dynamic_preview_closing">Dynamic preview will close in</string>
+    <string name="ticket_booking_date_time">Ticket Booking Date &amp; Time</string>
+    <string name="ticket_non_transferable">Ticket is Non-Transferable</string>
+    <string name="validity_footnote">*Valid for start of journey within 3 hour or until departure of the first train.</string>
+    <string name="local_storage_note">Note: This ticket is non refundable. Ticket is stored locally on the device. Please do not change your handset or perform factory reset.</string>
+
+    <string name="do_you_know">Do you know?</string>
+    <string name="dyk_line_1">IR recovers only 57% of cost of travel on an average.</string>
+    <string name="dyk_line_2">This ticket is booked on a personal user ID. It\u2019s sale/purchase is an offence u/s 143 of the Railways Act, 1989</string>
+    <string name="dyk_line_3">For enquiry and integrated railway helpline, please dial 139.</string>
+</resources>

@@ -1,0 +1,6 @@
+{
+  "name": "RailOne",
+  "description": "RailOne train ticket booking, UTS live preview, QR verification, and ticket editing app.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
