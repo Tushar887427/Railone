@@ -45,8 +45,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.data.StationCatalog
@@ -60,6 +64,7 @@ import com.example.ui.theme.ActivePillText
 import com.example.ui.theme.CancelledRed
 import com.example.ui.theme.CyanTicketEdge
 import com.example.ui.theme.DividerLight
+import com.example.ui.theme.MontserratFamily
 import com.example.ui.theme.PageBackground
 import com.example.ui.theme.QrContainerBg
 import com.example.ui.theme.RailBlue
@@ -177,10 +182,10 @@ fun BookingDetailsScreen(
       ) {
         // Cyan-capped Notched Ticket Card matching screenshot
         NotchedDetailsCard(
-          notchOffsetFromBottom = 86.dp,
+          notchOffsetFromBottom = 68.dp,
           modifier = Modifier.fillMaxWidth(),
         ) {
-          Box(modifier = Modifier.fillMaxWidth().height(11.dp).background(CyanTicketEdge))
+          Box(modifier = Modifier.fillMaxWidth().height(13.5.dp).background(CyanTicketEdge))
 
           DynamicPreviewHeader(
             remainingSeconds = remainingSeconds,
@@ -188,7 +193,11 @@ fun BookingDetailsScreen(
             securityCode = ticket.securityCode,
           )
 
-          Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 14.dp)) {
+          Column(
+            modifier =
+              Modifier.fillMaxWidth()
+                .padding(start = 14.dp, end = 14.dp, top = 16.dp, bottom = 18.dp)
+          ) {
             // Journey Ticket + ACTIVE pill
             Row(
               modifier = Modifier.fillMaxWidth(),
@@ -198,17 +207,18 @@ fun BookingDetailsScreen(
               Column {
                 Text(
                   text = "Journey Ticket",
-                  color = TextMuted,
-                  fontSize = 12.sp,
+                  fontFamily = FontFamily.SansSerif,
+                  color = Color(0xFF7B7B7B),
+                  fontSize = 13.5.sp,
                   fontWeight = FontWeight.Medium,
                 )
-                Spacer(modifier = Modifier.height(3.dp))
+                Spacer(modifier = Modifier.height(5.dp))
                 Text(
                   text = ticket.utsNumber,
-                  color = TextPrimary,
-                  fontSize = 15.sp,
+                  fontFamily = FontFamily.SansSerif,
+                  color = Color(0xFF222222),
+                  fontSize = 14.5.sp,
                   fontWeight = FontWeight.Bold,
-                  letterSpacing = 0.2.sp,
                 )
               }
 
@@ -226,14 +236,15 @@ fun BookingDetailsScreen(
               ) {
                 Text(
                   text = "• $statusLabel",
+                  fontFamily = FontFamily.SansSerif,
                   color = pillText,
-                  fontSize = 12.sp,
-                  fontWeight = FontWeight.Bold,
+                  fontSize = 12.5.sp,
+                  fontWeight = FontWeight.Medium,
                 )
               }
             }
 
-            Spacer(modifier = Modifier.height(14.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             DetailPairRow(
               leftLabel = "Source",
@@ -242,7 +253,7 @@ fun BookingDetailsScreen(
               rightValue = ticket.destinationStation,
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             DetailPairRow(
               leftLabel = "Distance",
@@ -251,7 +262,7 @@ fun BookingDetailsScreen(
               rightValue = "${ticket.adults} Adult, ${ticket.children} Child",
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             DetailPairRow(
               leftLabel = "Ticket Type",
@@ -260,7 +271,7 @@ fun BookingDetailsScreen(
               rightValue = ticket.trainType,
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             DetailPairRow(
               leftLabel = "Class",
@@ -269,7 +280,7 @@ fun BookingDetailsScreen(
               rightValue = StationCatalog.formatRupees(ticket.fareAmount),
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(13.dp))
 
             // Via pill box
             Row(
@@ -277,7 +288,7 @@ fun BookingDetailsScreen(
                 Modifier.fillMaxWidth()
                   .clip(RoundedCornerShape(10.dp))
                   .border(1.dp, DividerLight, RoundedCornerShape(10.dp))
-                  .padding(horizontal = 12.dp, vertical = 10.dp),
+                  .padding(horizontal = 12.dp, vertical = 9.dp),
               verticalAlignment = Alignment.CenterVertically,
             ) {
               Icon(
@@ -288,36 +299,60 @@ fun BookingDetailsScreen(
               )
               Spacer(modifier = Modifier.width(8.dp))
               Text(
-                text = "Via: ${ticket.viaRoute}",
-                color = TextPrimary,
+                text =
+                  buildAnnotatedString {
+                    withStyle(
+                      SpanStyle(
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFF191C20),
+                      )
+                    ) {
+                      append("Via: ")
+                    }
+                    withStyle(
+                      SpanStyle(
+                        fontFamily = FontFamily.SansSerif,
+                        fontWeight = FontWeight.Medium,
+                        color = Color(0xFF191C20),
+                      )
+                    ) {
+                      append(ticket.viaRoute)
+                    }
+                  },
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
               )
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(11.dp))
 
             Text(
               text = ticket.irCode,
-              color = TextPrimary,
-              fontSize = 13.sp,
+              fontFamily = MontserratFamily,
+              color = Color(0xFF191C20),
+              fontSize = 14.sp,
               fontWeight = FontWeight.Medium,
             )
           }
 
-          // Validity footnote + bottom cyan cap below dashed tear line
+          // Validity footnote + bottom cyan cap below dashed tear line (68.dp total: 54.5.dp + 13.5.dp)
           Box(
-            modifier = Modifier.fillMaxWidth().height(75.dp).padding(horizontal = 18.dp),
+            modifier =
+              Modifier.fillMaxWidth()
+                .height(54.5.dp)
+                .padding(start = 20.dp, end = 20.dp, top = 14.dp, bottom = 8.dp),
             contentAlignment = Alignment.CenterStart,
           ) {
             Text(
               text = "*Valid for start of journey within 3 hour or until departure of the first train.",
-              color = TextPrimary,
+              fontFamily = MontserratFamily,
+              color = Color(0xFF23272E),
               fontSize = 12.sp,
-              lineHeight = 17.sp,
+              fontWeight = FontWeight.Normal,
+              lineHeight = 16.sp,
             )
           }
-          Box(modifier = Modifier.fillMaxWidth().height(11.dp).background(CyanTicketEdge))
+          Box(modifier = Modifier.fillMaxWidth().height(13.5.dp).background(CyanTicketEdge))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -432,33 +467,35 @@ private fun DetailPairRow(
     Column(modifier = Modifier.weight(1f)) {
       Text(
         text = leftLabel,
-        color = TextMuted,
-        fontSize = 12.sp,
+        fontFamily = FontFamily.SansSerif,
+        color = Color(0xFF7B7B7B),
+        fontSize = 13.5.sp,
         fontWeight = FontWeight.Medium,
       )
-      Spacer(modifier = Modifier.height(3.dp))
+      Spacer(modifier = Modifier.height(4.dp))
       Text(
         text = leftValue,
-        color = TextPrimary,
-        fontSize = 14.5.sp,
+        fontFamily = FontFamily.SansSerif,
+        color = Color(0xFF222222),
+        fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
-        letterSpacing = 0.1.sp,
       )
     }
     Column(modifier = Modifier.weight(1f), horizontalAlignment = Alignment.End) {
       Text(
         text = rightLabel,
-        color = TextMuted,
-        fontSize = 12.sp,
+        fontFamily = FontFamily.SansSerif,
+        color = Color(0xFF7B7B7B),
+        fontSize = 13.5.sp,
         fontWeight = FontWeight.Medium,
       )
-      Spacer(modifier = Modifier.height(3.dp))
+      Spacer(modifier = Modifier.height(4.dp))
       Text(
         text = rightValue,
-        color = TextPrimary,
-        fontSize = 14.5.sp,
+        fontFamily = FontFamily.SansSerif,
+        color = Color(0xFF222222),
+        fontSize = 15.sp,
         fontWeight = FontWeight.Bold,
-        letterSpacing = 0.1.sp,
         textAlign = TextAlign.End,
       )
     }
