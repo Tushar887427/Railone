@@ -46,9 +46,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
-import androidx.compose.ui.text.font.FontSynthesis
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
@@ -63,6 +64,7 @@ import com.example.ui.theme.BookingTimeAmber
 import com.example.ui.theme.CancelledRed
 import com.example.ui.theme.CompletedGreen
 import com.example.ui.theme.CountdownOrangeRed
+import com.example.ui.theme.DevanagariFontFamily
 import com.example.ui.theme.MontserratFamily
 import com.example.ui.theme.PlatformBadgeBg
 import com.example.ui.theme.PlatformBadgeText
@@ -334,9 +336,10 @@ fun BookingTicketCard(
             ) {
               Text(
                 text = categoryDisplayLabel(ticket.category),
+                fontFamily = MontserratFamily,
                 color = badgeText,
-                fontSize = 12.sp,
-                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.5.sp,
+                fontWeight = FontWeight.Medium,
               )
             }
             Spacer(modifier = Modifier.width(6.dp))
@@ -354,12 +357,19 @@ fun BookingTicketCard(
           }
 
           Row(verticalAlignment = Alignment.CenterVertically) {
-            Text(text = "UTS: ", color = TextSecondary, fontSize = 13.sp)
+            Text(
+              text = "UTS: ",
+              fontFamily = FontFamily.SansSerif,
+              color = Color(0xFF7B7B7B),
+              fontSize = 13.5.sp,
+              fontWeight = FontWeight.Bold,
+            )
             Text(
               text = ticket.utsNumber,
+              fontFamily = MontserratFamily,
               color = TextPrimary,
-              fontSize = 13.sp,
-              fontWeight = FontWeight.Bold,
+              fontSize = 13.5.sp,
+              fontWeight = FontWeight.SemiBold,
             )
           }
         }
@@ -371,23 +381,37 @@ fun BookingTicketCard(
           horizontalArrangement = Arrangement.SpaceBetween,
         ) {
           Column {
-            Text(text = "Ticket Type", color = TextMuted, fontSize = 12.sp)
+            Text(
+              text = "Ticket Type",
+              fontFamily = MontserratFamily,
+              color = Color(0xFFA0A4AB),
+              fontSize = 12.5.sp,
+              fontWeight = FontWeight.Normal,
+            )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
               text = ticket.ticketType,
+              fontFamily = MontserratFamily,
               color = TextPrimary,
               fontSize = 14.sp,
-              fontWeight = FontWeight.Bold,
+              fontWeight = FontWeight.Medium,
             )
           }
           Column(horizontalAlignment = Alignment.End) {
-            Text(text = "Booking Date", color = TextMuted, fontSize = 12.sp)
+            Text(
+              text = "Booking Date",
+              fontFamily = MontserratFamily,
+              color = Color(0xFFA0A4AB),
+              fontSize = 12.5.sp,
+              fontWeight = FontWeight.Normal,
+            )
             Spacer(modifier = Modifier.height(2.dp))
             Text(
               text = ticket.bookingDateLabel,
+              fontFamily = MontserratFamily,
               color = TextPrimary,
               fontSize = 14.sp,
-              fontWeight = FontWeight.Bold,
+              fontWeight = FontWeight.Medium,
             )
           }
         }
@@ -401,24 +425,28 @@ fun BookingTicketCard(
         ) {
           Text(
             text = ticket.sourceStation,
+            fontFamily = MontserratFamily,
             color = TextPrimary,
             fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Normal,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.weight(1f),
           )
           Text(
             text = if (ticket.distanceKm > 0) "— ${ticket.distanceKm} km —" else "— Platform —",
-            color = TextMuted,
-            fontSize = 12.sp,
+            fontFamily = MontserratFamily,
+            color = Color(0xFF9EA2A8),
+            fontSize = 11.5.sp,
+            fontWeight = FontWeight.Normal,
             modifier = Modifier.padding(horizontal = 8.dp),
           )
           Text(
             text = ticket.destinationStation,
+            fontFamily = MontserratFamily,
             color = TextPrimary,
             fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
+            fontWeight = FontWeight.Normal,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
           )
@@ -440,9 +468,10 @@ fun BookingTicketCard(
         ) {
           Text(
             text = "Book Again",
+            fontFamily = MontserratFamily,
             color = RailBlue,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.SemiBold,
+            fontSize = 15.5.sp,
+            fontWeight = FontWeight.Medium,
           )
         }
         Box(modifier = Modifier.width(1.dp).height(20.dp).background(Color(0xFFD0D5DD)))
@@ -456,9 +485,10 @@ fun BookingTicketCard(
         ) {
           Text(
             text = "View Details",
+            fontFamily = MontserratFamily,
             color = RailBlue,
-            fontSize = 15.sp,
-            fontWeight = FontWeight.SemiBold,
+            fontSize = 15.5.sp,
+            fontWeight = FontWeight.Medium,
           )
         }
       }
@@ -482,15 +512,12 @@ fun DynamicPreviewHeader(
     modifier =
       modifier
         .fillMaxWidth()
-        .height(194.dp)
+        .height(198.dp)
         .clipToBounds()
         .background(Color(0xFF1A1312)),
     contentAlignment = Alignment.Center,
   ) {
     Canvas(modifier = Modifier.fillMaxSize().clipToBounds()) {
-      // Gapless staggered diamond tessellation matching the screenshot's security pattern:
-      // For center (cx, cy) with step (tileW, tileH), vertices (0, +-tileH) and (+-tileW/2, 0)
-      // tessellate the entire canvas cleanly with zero gaps.
       val tileW = 74.dp.toPx()
       val tileH = 54.dp.toPx()
       val cols = (size.width / tileW).toInt() + 3
@@ -521,7 +548,6 @@ fun DynamicPreviewHeader(
         }
       }
 
-      // Subtle dark vignette overlay so text stays super crisp
       drawRect(
         brush =
           Brush.horizontalGradient(
@@ -534,8 +560,8 @@ fun DynamicPreviewHeader(
           )
       )
 
-      // Vertical dashed lines inside left and right margins
-      val marginX = 34.dp.toPx()
+      // Vertical dashed lines inside left and right margins (31.5.dp from edges)
+      val marginX = 31.5.dp.toPx()
       val dash = PathEffect.dashPathEffect(floatArrayOf(14f, 10f), 0f)
       drawLine(
         color = Color.White.copy(alpha = 0.72f),
@@ -552,18 +578,17 @@ fun DynamicPreviewHeader(
         pathEffect = dash,
       )
 
-      // Rotated side labels: "INDIAN RAILWAYS" (left) & "भारतीय रेल" (right)
+      // Rotated side labels: "INDIAN RAILWAYS" (left) & "भारतीय रेल" (right, 0.sp letterSpacing so Devanagari shirorekha stays connected)
       val leftResult =
         textMeasurer.measure(
           text = "INDIAN RAILWAYS",
           style =
             TextStyle(
               fontFamily = MontserratFamily,
-              fontSynthesis = FontSynthesis.All,
-              color = Color.White.copy(alpha = 0.42f),
-              fontSize = 13.sp,
-              fontWeight = FontWeight.SemiBold,
-              letterSpacing = 1.6.sp,
+              color = Color.White.copy(alpha = 0.43f),
+              fontSize = 15.5.sp,
+              fontWeight = FontWeight.Bold,
+              letterSpacing = 0.35.sp,
             ),
         )
       rotate(degrees = -90f, pivot = Offset(marginX / 2f, size.height / 2f)) {
@@ -582,11 +607,11 @@ fun DynamicPreviewHeader(
           text = "भारतीय रेल",
           style =
             TextStyle(
-              fontFamily = MontserratFamily,
-              fontSynthesis = FontSynthesis.All,
-              color = Color.White.copy(alpha = 0.42f),
-              fontSize = 15.sp,
-              fontWeight = FontWeight.Medium,
+              fontFamily = DevanagariFontFamily,
+              color = Color.White.copy(alpha = 0.43f),
+              fontSize = 23.sp,
+              fontWeight = FontWeight.Bold,
+              letterSpacing = 0.sp,
             ),
         )
       val rightCenter = size.width - marginX / 2f
@@ -602,66 +627,66 @@ fun DynamicPreviewHeader(
       }
     }
 
+    val tightStyle = TextStyle(platformStyle = PlatformTextStyle(includeFontPadding = false))
     Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center,
-      modifier = Modifier.padding(horizontal = 42.dp, vertical = 10.dp),
+      modifier = Modifier.padding(horizontal = 36.dp),
     ) {
       Text(
         text = "Dynamic preview will close in",
+        fontFamily = MontserratFamily,
         color = Color.White,
-        fontSize = 15.sp,
+        fontSize = 16.sp,
         fontWeight = FontWeight.Medium,
-        letterSpacing = 0.1.sp,
+        style = tightStyle,
       )
-      Spacer(modifier = Modifier.height(4.dp))
+      Spacer(modifier = Modifier.height(14.dp))
       Text(
         text = formattedTimer,
+        fontFamily = MontserratFamily,
         color = CountdownOrangeRed,
-        fontSize = 42.sp,
-        fontWeight = FontWeight.ExtraBold,
-        letterSpacing = 1.5.sp,
-        style =
-          TextStyle(
-            fontFamily = MontserratFamily,
-            fontSynthesis = FontSynthesis.All,
-            fontFeatureSettings = "tnum",
-          ),
+        fontSize = 44.sp,
+        fontWeight = FontWeight.Bold,
+        letterSpacing = 0.8.sp,
+        style = tightStyle,
         modifier = Modifier.testTag("dynamic_preview_timer"),
       )
-      Spacer(modifier = Modifier.height(2.dp))
+      Spacer(modifier = Modifier.height(16.dp))
       Text(
         text = "Ticket Booking Date & Time",
-        color = Color(0xFFC8CDD5),
-        fontSize = 13.sp,
-        fontWeight = FontWeight.Normal,
-      )
-      Spacer(modifier = Modifier.height(4.dp))
-      Text(
-        text = bookingDateTimeFull,
-        color = BookingTimeAmber,
-        fontSize = 23.sp,
-        fontWeight = FontWeight.Bold,
-        style =
-          TextStyle(
-            fontFamily = MontserratFamily,
-            fontSynthesis = FontSynthesis.All,
-            fontFeatureSettings = "tnum",
-          ),
-      )
-      Spacer(modifier = Modifier.height(4.dp))
-      Text(
-        text = securityCode,
-        color = Color.White,
+        fontFamily = MontserratFamily,
+        color = Color(0xFF9E9D9D),
         fontSize = 14.sp,
         fontWeight = FontWeight.Medium,
+        style = tightStyle,
       )
-      Spacer(modifier = Modifier.height(2.dp))
+      Spacer(modifier = Modifier.height(10.dp))
+      Text(
+        text = bookingDateTimeFull,
+        fontFamily = MontserratFamily,
+        color = BookingTimeAmber,
+        fontSize = 24.5.sp,
+        fontWeight = FontWeight.SemiBold,
+        style = tightStyle,
+      )
+      Spacer(modifier = Modifier.height(9.dp))
+      Text(
+        text = securityCode,
+        fontFamily = MontserratFamily,
+        color = Color(0xFFEAEAEA),
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Normal,
+        style = tightStyle,
+      )
+      Spacer(modifier = Modifier.height(7.dp))
       Text(
         text = "Ticket is Non-Transferable",
-        color = Color.White,
-        fontSize = 13.5.sp,
+        fontFamily = MontserratFamily,
+        color = Color(0xFFDCDCDC),
+        fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
+        style = tightStyle,
       )
     }
   }
@@ -669,12 +694,12 @@ fun DynamicPreviewHeader(
 
 @Composable
 fun NotchedDetailsCard(
-  notchOffsetFromBottom: Dp = 84.dp,
+  notchOffsetFromBottom: Dp = 68.dp,
   modifier: Modifier = Modifier,
   content: @Composable () -> Unit,
 ) {
   val cornerRadius = 15.dp
-  val notchRadius = 10.dp
+  val notchRadius = 11.dp
   val density = LocalDensity.current
   val ticketShape =
     remember(density, notchOffsetFromBottom) {

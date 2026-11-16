@@ -4,15 +4,41 @@ import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontSynthesis
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.R
 
-// Register only Regular (400) so Compose's FontSynthesis.All synthesizes Medium/SemiBold/Bold weights crisply
-val MontserratFamily = FontFamily(Font(R.font.montserrat, FontWeight.Normal))
+val MontserratFamily =
+  FontFamily(
+    Font(R.font.montserrat_400, FontWeight.Normal),
+    Font(R.font.montserrat_500, FontWeight.Medium),
+    Font(R.font.montserrat_600, FontWeight.SemiBold),
+    Font(R.font.montserrat_700, FontWeight.Bold),
+    Font(R.font.montserrat_800, FontWeight.ExtraBold),
+  )
 
-val InterFamily = FontFamily(Font(R.font.inter, FontWeight.Normal))
+val PlusJakartaSansFamily =
+  FontFamily(
+    Font(R.font.plus_jakarta_sans_400, FontWeight.Normal),
+    Font(R.font.plus_jakarta_sans_500, FontWeight.Medium),
+    Font(R.font.plus_jakarta_sans_600, FontWeight.SemiBold),
+    Font(R.font.plus_jakarta_sans_700, FontWeight.Bold),
+    Font(R.font.plus_jakarta_sans_800, FontWeight.ExtraBold),
+  )
+
+val InterFamily =
+  FontFamily(
+    Font(R.font.inter_400, FontWeight.Normal),
+    Font(R.font.inter_500, FontWeight.Medium),
+    Font(R.font.inter_600, FontWeight.SemiBold),
+    Font(R.font.inter_700, FontWeight.Bold),
+  )
+
+val DevanagariFontFamily =
+  FontFamily(
+    Font(R.font.noto_sans_devanagari_600, FontWeight.SemiBold),
+    Font(R.font.noto_sans_devanagari_700, FontWeight.Bold),
+  )
 
 private fun railStyle(
   fontSize: Int,
@@ -23,7 +49,6 @@ private fun railStyle(
   TextStyle(
     fontFamily = MontserratFamily,
     fontWeight = fontWeight,
-    fontSynthesis = FontSynthesis.All,
     fontSize = fontSize.sp,
     lineHeight = lineHeight.sp,
     letterSpacing = letterSpacing.sp,
